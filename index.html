@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizee app</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+<div class="app-box">
+    <span class="app-box__icon">
+        <i class="fa fa-question-circle app-box__icon"></i>
+    </span>
+    <h3 class="app-box__header">
+        Question:
+    </h3>
+    <h1 class="app-box__question">
+        Who is the President of Poland
+    </h1>
+    <div class="answer-box">
+        <form>
+            <radiogroup id="quiz-answers">
+                <label class="answer-box__label">
+                    <input name="answer" type="radio" value="1" class="answer-box__option js-quiz-option"> Jan Kowalski
+                    <span class="label-icon"><i class="fa fa-check-circle-o"></i></span>
+                </label>
+                <label class="answer-box__label">
+                    <input name="answer" type="radio" value="no" class="answer-box__option js-quiz-option"> Bogdan Klich
+                    <span class="label-icon"><i class="fa fa-check-circle-o"></i></span>
+                </label>
+                <label class="answer-box__label">
+                    <input name="answer" type="radio" value="no" class="answer-box__option js-quiz-option"> Bronisław Komorowski
+                    <span class="label-icon"><i class="fa fa-check-circle-o"></i></span>
+                </label>
+                <label class="answer-box__label">
+                    <input name="answer" type="radio" value="no" class="answer-box__option js-quiz-option"> Andrzej Duda
+                    <span class="label-icon"><i class="fa fa-check-circle-o"></i></span>
+                </label>
+            </radiogroup>
+        </form>
+    </div>
+    <button class="app-box__next">Next<span class="next-icon"><i class="fa fa-chevron-right"></i></span></button>
+</div>
+</body>
+</html>
