@@ -30,6 +30,12 @@
     margin: 25px auto;
 }
 
+.answer-box fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 .answer-box__label {
     display: block;
     padding-left: 30px;
