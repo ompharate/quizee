@@ -20,7 +20,7 @@
 }
 
 .app-box__question {
-    margin: 15px 0;
+    margin: 15px 0 15px 95px;
     font-size: 22px;
     color: rgba(0, 0, 0, .45);
 }
@@ -96,4 +96,3 @@
     font-size: 27px;
     color: #9dcf5e;
 }
-
