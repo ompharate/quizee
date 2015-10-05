@@ -26,10 +26,10 @@ window.onload = function() {
         for (var i = 0; i < options.length;  i++ ) {
             var option = options[i];
             if (option.checked) {
-                option.parentElement.classList.add('active');
+                option.parentElement.classList.add('selected');
             }
             else {
-                option.parentElement.classList.remove('active');
+                option.parentElement.classList.remove('selected');
             }
         }
     }
