@@ -2,11 +2,12 @@
 window.onload = function() {
     var quizAnswers = document.getElementById('quiz-answers');
     var nextButton = document.querySelector('.js-next-question');
+    var answerBox = document.querySelector('.answer-box');
     var allQuestions = [
       {question: "Who is the author of The Witcher?", choices: ["Krzysztof Sienkiewicz", "Andrzej Sapkowski", "Tomasz Bagiński", "Adam Mickiewicz"], correctAnswer:1},
       {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:0},
       {question: "Who is the creator of The Witcher video games?", choices: ["Techland", "EA", "CD Projekt Red", "People Can Fly"], correctAnswer:3},
-      {question: "What is Geralt's mother name?", choices: ["Shani", "Yennefer", "Tris Merigold", " Visenna"], correctAnswer:4},      
+      {question: "What is Geralt's mother name?", choices: ["Shani", "Yennefer", "Tris Merigold", " Visenna"], correctAnswer:4},
       {question: "Vizimir was the king of?", choices: ["Radania", "Nilfgaard", "Temeria", " Skellige"], correctAnswer:0},
       {question: "Philippa Eilhart is?", choices: ["Elf", "Sorceress", "Queen"], correctAnswer:1},
       {question: "Who is Geralt's best friend?", choices: ["Jaskier", "Letho", "Vernon Roche", "Rience", "Dijkstra"], correctAnswer:0},
@@ -75,16 +76,20 @@ window.onload = function() {
     }
 
     function loadNextQuestion() {
-      while (quizAnswers.firstChild) {
-        quizAnswers.removeChild(quizAnswers.firstChild);
-      }
+      answerBox.classList.add('hidden');
+      window.setTimeout(function() {
+        while (quizAnswers.firstChild) {
+          quizAnswers.removeChild(quizAnswers.firstChild);
+        }
 
-      if (currentQuestionIndex === allQuestions.length) {
-        alert('Your score is ...')
-      }
-      else if (currentQuestionIndex < allQuestions.length) {
-        displayQuestion(currentQuestionIndex);
-        currentQuestionIndex++;
-      }
+        if (currentQuestionIndex === allQuestions.length) {
+          alert('Your score is ...')
+        }
+        else if (currentQuestionIndex < allQuestions.length) {
+          displayQuestion(currentQuestionIndex);
+          currentQuestionIndex++;
+          answerBox.classList.remove('hidden');          
+        }
+      }, 1100);
     }
 };
