@@ -1,6 +1,7 @@
 
 window.onload = function() {
     var quizAnswers = document.getElementById('quiz-answers');
+    var nextButton = document.querySelector('.js-next-question');
     var allQuestions = [
       {question: "Who is the author of The Witcher?", choices: ["Krzysztof Sienkiewicz", "Andrzej Sapkowski", "Tomasz Bagiński", "Adam Mickiewicz"], correctAnswer:1},
       {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:0},
@@ -13,10 +14,12 @@ window.onload = function() {
       {question: "Sun is a symbol of?", choices: ["Redania", "Kovir", "Cintra", "Nilfgaard"], correctAnswer:4},
       {question: "Did Triss Merigold die in Sodden battle?", choices: ["Yes", "No"], correctAnswer:1}
     ];
+    var currentQuestionIndex = 1;
 
     initForm();
 
     quizAnswers.addEventListener('change', selectAnswer, false);
+    nextButton.addEventListener('click', loadNextQuestion, false);
 
     function selectAnswer() {
         var options = document.querySelectorAll('.js-quiz-option');
@@ -33,12 +36,7 @@ window.onload = function() {
 
     //Display first question on load
      function initForm() {
-       var firstQuestion = allQuestions[0];
-       var options = firstQuestion.choices;
-       setQuestionTitle(firstQuestion.question);
-       for (var i = 0; i < options.length; i++) {
-         createOption(options[i]);
-      }
+       displayQuestion(0);
     }
 
     function createOption(name) {
@@ -64,5 +62,30 @@ window.onload = function() {
     function setQuestionTitle(title) {
       var questionTitle = document.querySelector('.js-question-title');
       questionTitle.innerHTML = title;
+    }
+
+    function displayQuestion(index) {
+      var currentQuestion = allQuestions[index];
+      var options = currentQuestion.choices;
+
+      setQuestionTitle(currentQuestion.question);
+
+      for (var i = 0; i < options.length; i++) {
+        createOption(options[i]);
+      }
+    }
+
+    function loadNextQuestion() {
+      while (quizAnswers.firstChild) {
+        quizAnswers.removeChild(quizAnswers.firstChild);
+      }
+
+      if (currentQuestionIndex === allQuestions.length) {
+        alert('Your score is ...')
+      }
+      else if (currentQuestionIndex < allQuestions.length) {
+        displayQuestion(currentQuestionIndex);
+        currentQuestionIndex++;
+      }
     }
 };
