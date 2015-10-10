@@ -88,8 +88,8 @@ window.onload = function() {
         else if (currentQuestionIndex < allQuestions.length) {
           displayQuestion(currentQuestionIndex);
           currentQuestionIndex++;
-          answerBox.classList.remove('hidden');          
+          answerBox.classList.remove('hidden');
         }
-      }, 1100);
+      }, 500);
     }
 };
