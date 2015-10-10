@@ -1,6 +1,8 @@
 
 window.onload = function() {
     var quizAnswers = document.getElementById('quiz-answers');
+    var questionsTotalUi = document.getElementById('questions-total');
+    var questionNumberUi = document.getElementById('question-number');
     var nextButton = document.querySelector('.js-next-question');
     var answerBox = document.querySelector('.answer-box');
     var allQuestions = [
@@ -36,6 +38,7 @@ window.onload = function() {
 
     //Display first question on load
      function initForm() {
+       questionsTotalUi.innerHTML = allQuestions.length;
        displayQuestion(0);
     }
 
@@ -68,6 +71,7 @@ window.onload = function() {
       var currentQuestion = allQuestions[index];
       var options = currentQuestion.choices;
 
+      questionNumberUi.innerHTML = index + 1;
       setQuestionTitle(currentQuestion.question);
 
       for (var i = 0; i < options.length; i++) {
