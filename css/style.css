@@ -73,7 +73,8 @@
     display: none;
 }
 
-.app-box__next {
+.app-box__next,
+.app-box__result__button {
     width: 130px;
     float: right;
     padding: 0;
@@ -89,6 +90,10 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.app-box__result__button {
+  float: none;
 }
 
 .next-icon {
@@ -107,4 +112,18 @@
     line-height: 50px;
     font-size: 27px;
     color: #9dcf5e;
+}
+
+.highlight {
+  color: #9dcf5e;
+}
+
+.app-box__result {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.app-box__result__header {
+  font-size: 32px;
+  color: rgba(0, 0, 0, .45)
 }

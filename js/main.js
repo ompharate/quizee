@@ -5,6 +5,7 @@ window.onload = function() {
     var questionNumberUi = document.getElementById('question-number');
     var nextButton = document.querySelector('.js-next-question');
     var answerBox = document.querySelector('.answer-box');
+    var appContainer = document.querySelector('.js-app-container');
     var currentQuestionIndex = 0;
     var userPoints = 0;
     var allQuestions = [
@@ -110,12 +111,31 @@ window.onload = function() {
         currentQuestionIndex++;
 
         if (currentQuestionIndex === allQuestions.length) {
-          alert('Your score is ...' + userPoints);
+          displayResult();
         }
         else if (currentQuestionIndex < allQuestions.length) {
           displayQuestion(currentQuestionIndex);
           answerBox.classList.remove('hidden');
         }
       }, 500);
+    }
+
+    function displayResult() {
+      appContainer.innerHTML = '';
+
+      var resultBox = document.createElement('div');
+      var resultHeader = document.createElement('h1');
+      var tryAgainBtn = document.createElement('button');
+
+      resultBox.className = 'app-box__result';
+      resultHeader.className = 'app-box__result__header';
+      tryAgainBtn.className = 'app-box__result__button';
+      resultHeader.innerHTML = 'Your score is ' + '<span class="highlight">' + userPoints + '</span>' + ' out of '+ allQuestions.length;
+      tryAgainBtn.innerHTML = 'Try again';
+      tryAgainBtn.onclick = function(){ window.location.reload(); };
+
+      resultBox.appendChild(resultHeader);
+      resultBox.appendChild(tryAgainBtn);
+      appContainer.appendChild(resultBox);
     }
 };
