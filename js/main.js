@@ -5,6 +5,7 @@ window.onload = function() {
     var questionNumberUi = document.getElementById('question-number');
     var nextButton = document.querySelector('.js-next-question');
     var answerBox = document.querySelector('.answer-box');
+    var currentQuestionIndex = 1;
     var allQuestions = [
       {question: "Who is the author of The Witcher?", choices: ["Krzysztof Sienkiewicz", "Andrzej Sapkowski", "Tomasz Bagiński", "Adam Mickiewicz"], correctAnswer:1},
       {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:0},
@@ -16,7 +17,6 @@ window.onload = function() {
       {question: "Sun is a symbol of?", choices: ["Redania", "Kovir", "Cintra", "Nilfgaard"], correctAnswer:4},
       {question: "Did Triss Merigold die in Sodden battle?", choices: ["Yes", "No"], correctAnswer:1}
     ];
-    var currentQuestionIndex = 1;
 
     initForm();
 
@@ -79,7 +79,19 @@ window.onload = function() {
       }
     }
 
+    function AnswerNotSelected() {
+      var selectedAnswers = document.querySelectorAll('.js-quiz-option:checked');
+      if (selectedAnswers.length === 0) {
+        alert('Please select an answer');
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     function loadNextQuestion() {
+      if (AnswerNotSelected()) { return; }
       answerBox.classList.add('hidden');
       window.setTimeout(function() {
         while (quizAnswers.firstChild) {
@@ -87,7 +99,7 @@ window.onload = function() {
         }
 
         if (currentQuestionIndex === allQuestions.length) {
-          alert('Your score is ...')
+          alert('Your score is ...');
         }
         else if (currentQuestionIndex < allQuestions.length) {
           displayQuestion(currentQuestionIndex);
