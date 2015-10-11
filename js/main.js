@@ -13,7 +13,7 @@ window.onload = function() {
       {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:1},
       {question: "Who is the creator of The Witcher video games?", choices: ["Techland", "EA", "CD Projekt Red", "People Can Fly"], correctAnswer:2},
       {question: "What is Geralt's mother name?", choices: ["Shani", "Yennefer", "Tris Merigold", " Visenna"], correctAnswer:3},
-      {question: "Vizimir was the king of?", choices: ["Radania", "Nilfgaard", "Temeria", " Skellige"], correctAnswer:0},
+      {question: "Vizimir was the king of?", choices: ["Redania", "Nilfgaard", "Temeria", " Skellige"], correctAnswer:0},
       {question: "Philippa Eilhart is?", choices: ["Elf", "Sorceress", "Queen"], correctAnswer:1},
       {question: "Who is Geralt's best friend?", choices: ["Jaskier", "Letho", "Vernon Roche", "Rience", "Dijkstra"], correctAnswer:0},
       {question: "Sun is a symbol of?", choices: ["Redania", "Kovir", "Cintra", "Nilfgaard"], correctAnswer:3},
