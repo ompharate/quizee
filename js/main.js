@@ -5,17 +5,17 @@ window.onload = function() {
     var questionNumberUi = document.getElementById('question-number');
     var nextButton = document.querySelector('.js-next-question');
     var answerBox = document.querySelector('.answer-box');
-    var currentQuestionIndex = 1;
+    var currentQuestionIndex = 0;
     var userPoints = 0;
     var allQuestions = [
       {question: "Who is the author of The Witcher?", choices: ["Krzysztof Sienkiewicz", "Andrzej Sapkowski", "Tomasz Bagiński", "Adam Mickiewicz"], correctAnswer:1},
-      {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:0},
-      {question: "Who is the creator of The Witcher video games?", choices: ["Techland", "EA", "CD Projekt Red", "People Can Fly"], correctAnswer:3},
-      {question: "What is Geralt's mother name?", choices: ["Shani", "Yennefer", "Tris Merigold", " Visenna"], correctAnswer:4},
+      {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:1},
+      {question: "Who is the creator of The Witcher video games?", choices: ["Techland", "EA", "CD Projekt Red", "People Can Fly"], correctAnswer:2},
+      {question: "What is Geralt's mother name?", choices: ["Shani", "Yennefer", "Tris Merigold", " Visenna"], correctAnswer:3},
       {question: "Vizimir was the king of?", choices: ["Radania", "Nilfgaard", "Temeria", " Skellige"], correctAnswer:0},
       {question: "Philippa Eilhart is?", choices: ["Elf", "Sorceress", "Queen"], correctAnswer:1},
       {question: "Who is Geralt's best friend?", choices: ["Jaskier", "Letho", "Vernon Roche", "Rience", "Dijkstra"], correctAnswer:0},
-      {question: "Sun is a symbol of?", choices: ["Redania", "Kovir", "Cintra", "Nilfgaard"], correctAnswer:4},
+      {question: "Sun is a symbol of?", choices: ["Redania", "Kovir", "Cintra", "Nilfgaard"], correctAnswer:3},
       {question: "Did Triss Merigold die in Sodden battle?", choices: ["Yes", "No"], correctAnswer:1}
     ];
 
@@ -40,7 +40,7 @@ window.onload = function() {
     //Display first question on load
      function initForm() {
        questionsTotalUi.innerHTML = allQuestions.length;
-       displayQuestion(0);
+       displayQuestion(currentQuestionIndex);
     }
 
     function createOption(name, index) {
@@ -93,23 +93,27 @@ window.onload = function() {
     }
 
     function countPoints() {
-      var userAnswer = document.querySelector('.js-quiz-option:checked');
+      var userAnswer = document.querySelector('.js-quiz-option:checked').value;
+      var correctAnswer = allQuestions[currentQuestionIndex].correctAnswer;
+      if (parseInt(userAnswer) === correctAnswer) { userPoints++; }
     }
 
     function loadNextQuestion() {
       if (AnswerNotSelected()) { return; }
+      countPoints();
       answerBox.classList.add('hidden');
       window.setTimeout(function() {
         while (quizAnswers.firstChild) {
           quizAnswers.removeChild(quizAnswers.firstChild);
         }
 
+        currentQuestionIndex++;
+
         if (currentQuestionIndex === allQuestions.length) {
-          alert('Your score is ...');
+          alert('Your score is ...' + userPoints);
         }
         else if (currentQuestionIndex < allQuestions.length) {
           displayQuestion(currentQuestionIndex);
-          currentQuestionIndex++;
           answerBox.classList.remove('hidden');
         }
       }, 500);
