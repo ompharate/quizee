@@ -74,6 +74,7 @@
 }
 
 .app-box__next,
+.app-box__back,
 .app-box__result__button {
     width: 130px;
     float: right;
@@ -92,13 +93,25 @@
     cursor: pointer;
 }
 
+.app-box__back {
+  height: 47px;
+  width: 50px;
+  margin-right: 5px;
+  background-color: #d6dce3;
+}
+
 .app-box__result__button {
   float: none;
 }
 
-.next-icon {
+.next-icon,
+.back-icon {
     margin-left: 25px;
     font-size: 18px;
+}
+
+.back-icon {
+  margin: auto;
 }
 
 .next-icon i {
