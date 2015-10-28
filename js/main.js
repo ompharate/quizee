@@ -9,6 +9,7 @@ window.onload = function() {
     var appContainer = document.querySelector('.js-app-container');
     var currentQuestionIndex = 0;
     var userPoints = 0;
+    var userChoicesTable = [];
     var allQuestions = [
       {question: "Who is the author of The Witcher?", choices: ["Krzysztof Sienkiewicz", "Andrzej Sapkowski", "Tomasz Bagiński", "Adam Mickiewicz"], correctAnswer:1},
       {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:1},
@@ -99,6 +100,18 @@ window.onload = function() {
       var userAnswer = document.querySelector('.js-quiz-option:checked').value;
       var correctAnswer = allQuestions[currentQuestionIndex].correctAnswer;
       if (parseInt(userAnswer) === correctAnswer) { userPoints++; }
+
+      // save user Choice
+      userChoicesTable[currentQuestionIndex] = userAnswer;
+    }
+
+    function selectUserAnswer() {
+      var userChoice = userChoicesTable[currentQuestionIndex];
+      if (userChoice) {
+        var targetAnswer = document.querySelector('.js-quiz-option[value="' + userChoice + '"]');
+        targetAnswer.checked = true;
+        selectAnswer();
+      }
     }
 
     function loadNextQuestion() {
@@ -115,6 +128,7 @@ window.onload = function() {
         else if (currentQuestionIndex < allQuestions.length) {
           displayQuestion(currentQuestionIndex);
           answerBox.classList.remove('hidden');
+          selectUserAnswer();
         }
       }, 500);
     }
@@ -127,6 +141,7 @@ window.onload = function() {
           currentQuestionIndex--;
           displayQuestion(currentQuestionIndex);
           answerBox.classList.remove('hidden');
+          selectUserAnswer();
         }, 500);
       }
       else {
