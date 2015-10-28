@@ -118,7 +118,8 @@ window.onload = function() {
       if (AnswerNotSelected())  return;
       countPoints();
       answerBox.classList.add('hidden');
-      window.setTimeout(function() {
+
+      function loadNextQuestionInside() {
         quizAnswers.innerHTML = '';
         currentQuestionIndex++;
 
@@ -130,19 +131,23 @@ window.onload = function() {
           answerBox.classList.remove('hidden');
           selectUserAnswer();
         }
-      }, 500);
+      }
+
+      window.setTimeout( loadNextQuestionInside, 500);
     }
 
     function loadPreviousQuestion() {
+      function loadPreviousQuestionInside() {
+        quizAnswers.innerHTML = '';
+        currentQuestionIndex--;
+        displayQuestion(currentQuestionIndex);
+        answerBox.classList.remove('hidden');
+        selectUserAnswer();
+      }
+
       if  (currentQuestionIndex > 0) {
         answerBox.classList.add('hidden');
-        window.setTimeout(function() {
-          quizAnswers.innerHTML = '';
-          currentQuestionIndex--;
-          displayQuestion(currentQuestionIndex);
-          answerBox.classList.remove('hidden');
-          selectUserAnswer();
-        }, 500);
+        window.setTimeout(loadPreviousQuestionInside, 500);
       }
       else {
         alert('This is a first question!');
