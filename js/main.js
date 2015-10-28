@@ -4,6 +4,7 @@ window.onload = function() {
     var questionsTotalUi = document.getElementById('questions-total');
     var questionNumberUi = document.getElementById('question-number');
     var nextButton = document.querySelector('.js-next-question');
+    var backButton = document.querySelector('.js-previous-question');
     var answerBox = document.querySelector('.answer-box');
     var appContainer = document.querySelector('.js-app-container');
     var currentQuestionIndex = 0;
@@ -24,6 +25,7 @@ window.onload = function() {
 
     quizAnswers.addEventListener('change', selectAnswer, false);
     nextButton.addEventListener('click', loadNextQuestion, false);
+    backButton.addEventListener('click', loadPreviousQuestion, false);
 
     function selectAnswer() {
         var options = document.querySelectorAll('.js-quiz-option');
@@ -100,14 +102,11 @@ window.onload = function() {
     }
 
     function loadNextQuestion() {
-      if (AnswerNotSelected()) { return; }
+      if (AnswerNotSelected())  return;
       countPoints();
       answerBox.classList.add('hidden');
       window.setTimeout(function() {
-        while (quizAnswers.firstChild) {
-          quizAnswers.removeChild(quizAnswers.firstChild);
-        }
-
+        quizAnswers.innerHTML = '';
         currentQuestionIndex++;
 
         if (currentQuestionIndex === allQuestions.length) {
@@ -118,6 +117,21 @@ window.onload = function() {
           answerBox.classList.remove('hidden');
         }
       }, 500);
+    }
+
+    function loadPreviousQuestion() {
+      if  (currentQuestionIndex > 0) {
+        answerBox.classList.add('hidden');
+        window.setTimeout(function() {
+          quizAnswers.innerHTML = '';
+          currentQuestionIndex--;
+          displayQuestion(currentQuestionIndex);
+          answerBox.classList.remove('hidden');
+        }, 500);
+      }
+      else {
+        alert('This is a first question!');
+      }
     }
 
     function displayResult() {
