@@ -19,7 +19,32 @@ window.onload = function() {
   nextButton.addEventListener('click', loadNextQuestion, false);
   backButton.addEventListener('click', loadPreviousQuestion, false);
 
-  //Display first question on load
+
+  function  fetchQuestions(url) {
+    var httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Please use modern browser :)');
+      return false;
+    }
+
+    httpRequest.onreadystatechange = addQuizQuestions;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+
+    function addQuizQuestions() {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          allQuestions = JSON.parse(httpRequest.responseText);
+          window.setTimeout(initForm, 2000);
+        }
+        else {
+          alert('There was a problem with fetching quiz questions.');
+        }
+      }
+    }
+  }
+    
   function initForm() {
     questionsTotalUi.innerHTML = allQuestions.length;
     displayQuestion(currentQuestionIndex);
@@ -144,31 +169,6 @@ window.onload = function() {
       var targetAnswer = document.querySelector('.js-quiz-option[value="' + userChoice + '"]');
       targetAnswer.checked = true;
       selectAnswer();
-    }
-  }
-
-  function  fetchQuestions(url) {
-    var httpRequest = new XMLHttpRequest();
-
-    if (!httpRequest) {
-      alert('Please use modern browser :)');
-      return false;
-    }
-
-    httpRequest.onreadystatechange = addQuizQuestions;
-    httpRequest.open('GET', url);
-    httpRequest.send();
-
-    function addQuizQuestions() {
-      if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        if (httpRequest.status === 200) {
-          allQuestions = JSON.parse(httpRequest.responseText);
-          window.setTimeout(initForm, 2000);          
-        }
-        else {
-          alert('There was a problem with fetching quiz questions.');
-        }
-      }
     }
   }
 
