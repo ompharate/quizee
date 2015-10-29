@@ -6,6 +6,10 @@
     font-family: Verdana;
 }
 
+.app-box.hidden {
+  display: none;
+}
+
 .app-box__icon {
     float: left;
     margin-right: 15px;
@@ -140,4 +144,17 @@
 .app-box__result__header {
   font-size: 32px;
   color: rgba(0, 0, 0, .45)
+}
+
+.questions-loader {
+  width: 600px;
+  margin: 0 auto;
+  padding-top: 150px;
+  text-align: center;
+  font-size: 36px;
+  color: rgba(0, 0, 0, .45);
+}
+
+.questions-loader.hidden {
+  display: none;
 }

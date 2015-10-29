@@ -1,4 +1,3 @@
-
 window.onload = function() {
   var quizAnswers = document.getElementById('quiz-answers');
   var questionsTotalUi = document.getElementById('questions-total');
@@ -7,44 +6,38 @@ window.onload = function() {
   var backButton = document.querySelector('.js-previous-question');
   var answerBox = document.querySelector('.answer-box');
   var appContainer = document.querySelector('.js-app-container');
+  var questionsLoader = document.querySelector('.js-questions-loader');
   var currentQuestionIndex = 0;
   var userPoints = 0;
   var userChoicesTable = [];
-  var allQuestions = [
-    {question: "Who is the author of The Witcher?", choices: ["Krzysztof Sienkiewicz", "Andrzej Sapkowski", "Tomasz Bagiński", "Adam Mickiewicz"], correctAnswer:1},
-    {question: "Is Ciri Gerlat's doughter?", choices: ["Yes", "No"], correctAnswer:1},
-    {question: "Who is the creator of The Witcher video games?", choices: ["Techland", "EA", "CD Projekt Red", "People Can Fly"], correctAnswer:2},
-    {question: "What is Geralt's mother name?", choices: ["Shani", "Yennefer", "Tris Merigold", " Visenna"], correctAnswer:3},
-    {question: "Vizimir was the king of?", choices: ["Redania", "Nilfgaard", "Temeria", " Skellige"], correctAnswer:0},
-    {question: "Philippa Eilhart is?", choices: ["Elf", "Sorceress", "Queen"], correctAnswer:1},
-    {question: "Who is Geralt's best friend?", choices: ["Jaskier", "Letho", "Vernon Roche", "Rience", "Dijkstra"], correctAnswer:0},
-    {question: "Sun is a symbol of?", choices: ["Redania", "Kovir", "Cintra", "Nilfgaard"], correctAnswer:3},
-    {question: "Did Triss Merigold die in Sodden battle?", choices: ["Yes", "No"], correctAnswer:1}
-  ];
+  var allQuestions = [];
+  var questionsUrl = 'https://api.myjson.com/bins/4a686';
 
-  initForm();
+  fetchQuestions(questionsUrl);
 
   quizAnswers.addEventListener('change', selectAnswer, false);
   nextButton.addEventListener('click', loadNextQuestion, false);
   backButton.addEventListener('click', loadPreviousQuestion, false);
 
   //Display first question on load
-   function initForm() {
-     questionsTotalUi.innerHTML = allQuestions.length;
-     displayQuestion(currentQuestionIndex);
+  function initForm() {
+    questionsTotalUi.innerHTML = allQuestions.length;
+    displayQuestion(currentQuestionIndex);
+    appContainer.classList.remove('hidden');
+    questionsLoader.classList.add('hidden');
   }
 
   function selectAnswer() {
-      var options = document.querySelectorAll('.js-quiz-option');
-      for (var i = 0; i < options.length;  i++ ) {
-          var option = options[i];
-          if (option.checked) {
-              option.parentElement.classList.add('selected');
-          }
-          else {
-              option.parentElement.classList.remove('selected');
-          }
+    var options = document.querySelectorAll('.js-quiz-option');
+    for (var i = 0; i < options.length;  i++ ) {
+      var option = options[i];
+      if (option.checked) {
+        option.parentElement.classList.add('selected');
       }
+      else {
+        option.parentElement.classList.remove('selected');
+      }
+    }
   }
 
   function loadNextQuestion() {
@@ -151,6 +144,31 @@ window.onload = function() {
       var targetAnswer = document.querySelector('.js-quiz-option[value="' + userChoice + '"]');
       targetAnswer.checked = true;
       selectAnswer();
+    }
+  }
+
+  function  fetchQuestions(url) {
+    var httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Please use modern browser :)');
+      return false;
+    }
+
+    httpRequest.onreadystatechange = addQuizQuestions;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+
+    function addQuizQuestions() {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          allQuestions = JSON.parse(httpRequest.responseText);
+          window.setTimeout(initForm, 2000);          
+        }
+        else {
+          alert('There was a problem with fetching quiz questions.');
+        }
+      }
     }
   }
 
