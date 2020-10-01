@@ -35,10 +35,10 @@
 }
 
 .answer-box {
-    width: 100%;
-    margin: 25px auto;
+    width: 90%;
+    margin: 30px auto;
     opacity: 1;
-    transition: .6s opacity;
+    transition: .4s opacity;
 }
 
 .answer-box.hidden {
@@ -48,7 +48,7 @@
 .answer-box fieldset {
     margin: 0;
     padding: 0;
-    border: none;
+    border:1px solid black;
 }
 
 .answer-box__label {
@@ -73,9 +73,6 @@
     display: block;
 }
 
-.answer-box__option {
-    display: none;
-}
 
 .app-box__next,
 .app-box__back,
@@ -151,7 +148,7 @@
   margin: 0 auto;
   padding-top: 150px;
   text-align: center;
-  font-size: 36px;
+  font-size: 32px;
   color: rgba(0, 0, 0, .45);
 }
 
